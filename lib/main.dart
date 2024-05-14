@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//erro no retornar do form para mostrar no list, provavelmente retornando fora do type
 void main() => runApp(ByteBankApp());
 
 class FormularioTransferencia extends StatelessWidget {
@@ -100,9 +101,6 @@ class ListaTransferencias extends StatefulWidget {
 class ListaTransferenciasState extends State<ListaTransferencias> {
   @override
   Widget build(BuildContext context) {
-    widget._transFerencias.add(Transferencia(valor: 10000, numeroConta: 50));
-    widget._transFerencias.add(Transferencia(valor: 10000, numeroConta: 50));
-    widget._transFerencias.add(Transferencia(valor: 10000, numeroConta: 50));
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tranferencias'),
