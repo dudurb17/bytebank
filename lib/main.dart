@@ -83,28 +83,35 @@ class ByteBankApp extends StatelessWidget {
     // TODO: implement build
     return MaterialApp(
         home: Scaffold(
-      body: ListaTransferencia(),
+      body: ListaTransferencias(),
     ));
   }
 }
 
-class ListaTransferencia extends StatelessWidget {
+class ListaTransferencias extends StatefulWidget {
   final List<Transferencia> _transFerencias = [];
 
   @override
+  State<StatefulWidget> createState() {
+    return ListaTransferenciasState();
+  }
+}
+
+class ListaTransferenciasState extends State<ListaTransferencias> {
+  @override
   Widget build(BuildContext context) {
-    _transFerencias.add(Transferencia(valor: 10000, numeroConta: 50));
-    _transFerencias.add(Transferencia(valor: 10000, numeroConta: 50));
-    _transFerencias.add(Transferencia(valor: 10000, numeroConta: 50));
+    widget._transFerencias.add(Transferencia(valor: 10000, numeroConta: 50));
+    widget._transFerencias.add(Transferencia(valor: 10000, numeroConta: 50));
+    widget._transFerencias.add(Transferencia(valor: 10000, numeroConta: 50));
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tranferencias'),
         backgroundColor: Colors.blue.shade200,
       ),
       body: ListView.builder(
-        itemCount: _transFerencias.length,
+        itemCount: widget._transFerencias.length,
         itemBuilder: (context, index) {
-          final transferencia = _transFerencias[index];
+          final transferencia = widget._transFerencias[index];
           return ItemTransferencia(transferencia);
         },
       ),
@@ -124,7 +131,7 @@ class ListaTransferencia extends StatelessWidget {
             (value) {
               debugPrint("Chegou no then");
               debugPrint("$value");
-              _transFerencias.add(value);
+              widget._transFerencias.add(value);
             },
           );
         },
