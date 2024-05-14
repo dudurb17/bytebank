@@ -28,21 +28,21 @@ class FormularioTransferencia extends StatelessWidget {
               icon: Icons.monetization_on,
             ),
             ElevatedButton(
-              onPressed: () => _criaTransferencia(),
+              onPressed: () => _criaTransferencia(context),
               child: Text("Confirmar"),
             )
           ],
         ));
   }
 
-  void _criaTransferencia() {
+  void _criaTransferencia(BuildContext context) {
     final int? numeroConta = int.tryParse(_controladorCampoNumeroConta.text);
     final double? valor = double.tryParse(_controladorCampoValor.text);
     if (numeroConta != null && valor != null) {
       final transFerenciaCriada =
           TransFerencia(numeroConta: numeroConta, valor: valor);
       debugPrint("$transFerenciaCriada");
-      debugPrint("$transFerenciaCriada");
+      Navigator.pop(context, transFerenciaCriada);
     }
   }
 }
@@ -106,10 +106,21 @@ class ListaTransferencia extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.blue.shade200,
-        onPressed: () => {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return FormularioTransferencia();
-          }))
+        onPressed: () {
+          final Future future = Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return FormularioTransferencia();
+              },
+            ),
+          );
+          future.then(
+            (value) {
+              debugPrint("Chegou no then");
+              debugPrint("$value");
+            },
+          );
         },
       ),
     );
