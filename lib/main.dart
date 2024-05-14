@@ -40,7 +40,7 @@ class FormularioTransferencia extends StatelessWidget {
     final double? valor = double.tryParse(_controladorCampoValor.text);
     if (numeroConta != null && valor != null) {
       final transFerenciaCriada =
-          TransFerencia(numeroConta: numeroConta, valor: valor);
+          Transferencia(numeroConta: numeroConta, valor: valor);
       debugPrint("$transFerenciaCriada");
       Navigator.pop(context, transFerenciaCriada);
     }
@@ -89,19 +89,24 @@ class ByteBankApp extends StatelessWidget {
 }
 
 class ListaTransferencia extends StatelessWidget {
+  final List<Transferencia> _transFerencias = [];
+
   @override
   Widget build(BuildContext context) {
+    _transFerencias.add(Transferencia(valor: 10000, numeroConta: 50));
+    _transFerencias.add(Transferencia(valor: 10000, numeroConta: 50));
+    _transFerencias.add(Transferencia(valor: 10000, numeroConta: 50));
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tranferencias'),
         backgroundColor: Colors.blue.shade200,
       ),
-      body: Column(
-        children: <Widget>[
-          ItemTransferencia(TransFerencia(valor: 50.30, numeroConta: 65)),
-          ItemTransferencia(TransFerencia(valor: 79090.30, numeroConta: 85)),
-          ItemTransferencia(TransFerencia(valor: 8762, numeroConta: 40)),
-        ],
+      body: ListView.builder(
+        itemCount: _transFerencias.length,
+        itemBuilder: (context, index) {
+          final transferencia = _transFerencias[index];
+          return ItemTransferencia(transferencia);
+        },
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -119,6 +124,7 @@ class ListaTransferencia extends StatelessWidget {
             (value) {
               debugPrint("Chegou no then");
               debugPrint("$value");
+              _transFerencias.add(value);
             },
           );
         },
@@ -128,7 +134,7 @@ class ListaTransferencia extends StatelessWidget {
 }
 
 class ItemTransferencia extends StatelessWidget {
-  final TransFerencia _transFerencia;
+  final Transferencia _transFerencia;
 
   ItemTransferencia(this._transFerencia);
 
@@ -144,11 +150,11 @@ class ItemTransferencia extends StatelessWidget {
   }
 }
 
-class TransFerencia {
+class Transferencia {
   final double valor;
   final int numeroConta;
 
-  TransFerencia({required this.valor, required this.numeroConta});
+  Transferencia({required this.valor, required this.numeroConta});
 
   @override
   String toString() {
