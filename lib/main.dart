@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,7 +10,27 @@ class FormularioTransferencia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container();
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Criando uma tranferencia"),
+          backgroundColor: Colors.blue.shade200,
+        ),
+        body: Column(
+          children: <Widget>[
+            const Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
+                  style: TextStyle(fontSize: 24.0),
+                  decoration: InputDecoration(
+                      labelText: "Número da conta", hintText: "0000"),
+                  keyboardType: TextInputType.number,
+                )),
+            ElevatedButton(
+              onPressed: () => {},
+              child: Text("teste"),
+            )
+          ],
+        ));
   }
 }
 
