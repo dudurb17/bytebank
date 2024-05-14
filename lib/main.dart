@@ -83,7 +83,7 @@ class ByteBankApp extends StatelessWidget {
     // TODO: implement build
     return MaterialApp(
         home: Scaffold(
-      body: FormularioTransferencia(),
+      body: ListaTransferencia(),
     ));
   }
 }
@@ -106,7 +106,11 @@ class ListaTransferencia extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.blue.shade200,
-        onPressed: () => {},
+        onPressed: () => {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return FormularioTransferencia();
+          }))
+        },
       ),
     );
   }
