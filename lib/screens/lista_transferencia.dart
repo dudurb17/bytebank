@@ -31,15 +31,14 @@ class ListaTransferenciasState extends State<ListaTransferencias> {
         child: Icon(Icons.add),
         backgroundColor: Colors.blue.shade200,
         onPressed: () {
-          final Future future = Navigator.push<Transferencia>(
+          Navigator.push<Transferencia>(
             context,
             MaterialPageRoute(
               builder: (context) {
                 return FormularioTransferencia();
               },
             ),
-          );
-          future.then(
+          ).then(
             (value) {
               setState(() {
                 if (value != null) {

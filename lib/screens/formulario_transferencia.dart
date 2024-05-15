@@ -3,6 +3,14 @@ import 'package:flutter/material.dart';
 import '../components/editor.dart';
 import '../models/transferencia.dart';
 
+const _titulo = "Criando uma tranferencia";
+
+const _rotuloConta = "Numero da conta";
+const _dicaConta = "0000";
+
+const _rotulovalor = "Valor";
+const _dicaValor = "0.00";
+
 class FormularioTransferencia extends StatelessWidget {
   final TextEditingController _controladorCampoNumeroConta =
       TextEditingController();
@@ -13,7 +21,7 @@ class FormularioTransferencia extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("Criando uma tranferencia"),
+        title: const Text(_titulo),
         backgroundColor: Colors.green[700],
       ),
       body: SingleChildScrollView(
@@ -21,12 +29,12 @@ class FormularioTransferencia extends StatelessWidget {
           children: <Widget>[
             Editor(
                 controlador: _controladorCampoNumeroConta,
-                rotulo: "Numero da conta",
-                dica: "0000"),
+                rotulo: _rotuloConta,
+                dica: _dicaConta),
             Editor(
               controlador: _controladorCampoValor,
-              rotulo: "Valor",
-              dica: "0.00",
+              rotulo: _rotulovalor,
+              dica: _dicaValor,
               icon: Icons.monetization_on,
             ),
             ElevatedButton(
