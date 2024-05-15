@@ -12,11 +12,12 @@ class FormularioTransferencia extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Criando uma tranferencia"),
-          backgroundColor: Colors.blue.shade200,
-        ),
-        body: Column(
+      appBar: AppBar(
+        title: Text("Criando uma tranferencia"),
+        backgroundColor: Colors.blue.shade200,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
           children: <Widget>[
             Editor(
                 controlador: _controladorCampoNumeroConta,
@@ -30,10 +31,12 @@ class FormularioTransferencia extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () => _criaTransferencia(context),
-              child: Text("Confirmar"),
+              child: const Text("Confirmar"),
             )
           ],
-        ));
+        ),
+      ),
+    );
   }
 
   void _criaTransferencia(BuildContext context) {
@@ -117,7 +120,7 @@ class ListaTransferenciasState extends State<ListaTransferencias> {
         child: Icon(Icons.add),
         backgroundColor: Colors.blue.shade200,
         onPressed: () {
-          final Future future = Navigator.push(
+          final Future future = Navigator.push<Transferencia>(
             context,
             MaterialPageRoute(
               builder: (context) {
@@ -127,9 +130,11 @@ class ListaTransferenciasState extends State<ListaTransferencias> {
           );
           future.then(
             (value) {
-              debugPrint("Chegou no then");
-              debugPrint("$value");
-              widget._transFerencias.add(value);
+              setState(() {
+                if (value != null) {
+                  widget._transFerencias.add(value);
+                }
+              });
             },
           );
         },
